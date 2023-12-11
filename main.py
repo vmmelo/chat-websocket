@@ -23,11 +23,10 @@ async def broadcast(message):
 async def handler(websocket, path):
     connections.add(websocket)
     try:
-        print(websocket)
         async for message in websocket:
-            print(f"Received message from {websocket}: {message}")
+            print(f"Received message from {websocket.id}: {message}")
             with open('data.txt', 'a') as f:
-                f.write(message + '\n')
+                f.write(f'{websocket.id} : {message}\n')
 
     finally:
         connections.remove(websocket)
